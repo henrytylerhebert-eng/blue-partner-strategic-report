@@ -84,12 +84,28 @@ ul{margin:0; padding:0;}
   color:var(--accent); font-weight:500;
 }
 
+/* ---- top-level view tabs ---- */
+.view-tabs{
+  position:sticky; top:0; z-index:70; display:flex; height:52px;
+  background:var(--bg); border-bottom:1px solid var(--line);
+}
+.view-tab{
+  flex:1; max-width:340px; font-family:var(--font-mono); font-size:.74rem; letter-spacing:.05em;
+  text-transform:uppercase; font-weight:500; background:none; border:none; cursor:pointer;
+  color:var(--text-faint); border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
+}
+.view-tab:hover{ color:var(--text-dim); }
+.view-tab.active{ color:var(--accent); border-bottom-color:var(--accent); }
+.view-tab:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+.view-panel{ display:none; }
+.view-panel.active{ display:block; }
+
 /* ---- shell layout ---- */
 .shell{display:grid; grid-template-columns:248px minmax(0,1fr); max-width:1280px; margin:0 auto;}
 @media (max-width:920px){.shell{grid-template-columns:1fr;}}
 
 .sidenav{
-  position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+  position:sticky; top:52px; align-self:start; height:calc(100vh - 52px); overflow-y:auto;
   padding:2rem 1.4rem 2rem 1.6rem; border-right:1px solid var(--line);
   display:flex; flex-direction:column; gap:1.6rem;
 }
@@ -429,6 +445,14 @@ section:last-of-type{border-bottom:none;}
 <body>
 
 
+
+
+<div class="view-tabs" role="tablist">
+  <button type="button" class="view-tab active" data-view="report" role="tab" aria-selected="true">Strategic Report</button>
+  <button type="button" class="view-tab" data-view="whitepaper" role="tab" aria-selected="false">White Paper · 16th JDC Case Study</button>
+</div>
+
+<div id="view-report" class="view-panel active">
 <div class="shell">
   <nav class="sidenav" aria-label="Report sections">
     <div class="brand">
@@ -1255,21 +1279,265 @@ section:last-of-type{border-bottom:none;}
     </div>
   </main>
 </div>
+</div>
+
+<div id="view-whitepaper" class="view-panel">
+<div class="shell">
+  <nav class="sidenav" aria-label="White paper sections">
+    <div class="brand">
+      <div class="mark">Blue<em>Partner</em></div>
+      <div class="sub">WHITE PAPER · CASE STUDY</div>
+    </div>
+    <div class="navlist" id="wpNavlist">
+      <a href="#wp-summary"><span class="num">01</span>Executive Summary</a>
+      <a href="#wp-environment"><span class="num">02</span>Operating Environment &amp; Statute</a>
+      <a href="#wp-legacy"><span class="num">03</span>The Legacy Workflow</a>
+      <a href="#wp-transition"><span class="num">04</span>The Digital Transition</a>
+      <a href="#wp-adoption"><span class="num">05</span>Adoption, Personnel &amp; Results</a>
+      <a href="#wp-model"><span class="num">06</span>The Replication Model</a>
+      <a href="#wp-scorecard"><span class="num">07</span>Faster Court Processing Scorecard</a>
+      <a href="#wp-referrals"><span class="num">08</span>Extending to Referrals</a>
+      <a href="#wp-role"><span class="num">09</span>Blue Partner's Role</a>
+      <a href="#wp-pilot"><span class="num">10</span>Recommended Pilot</a>
+      <a href="#wp-governance"><span class="num">11</span>Governance &amp; Risk</a>
+      <a href="#wp-followup"><span class="num">12</span>Follow-Up &amp; Conclusion</a>
+      <a href="#wp-sources"><span class="num">13</span>Sources &amp; Evidence Status</a>
+    </div>
+    <div class="legend">
+      <div class="lg-title">Evidence key</div>
+      <div class="legend-row"><span class="chip verified">Verified</span> cited public source</div>
+      <div class="legend-row"><span class="chip founder">Founder</span> interview-reported</div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <span class="eyebrow">A Blue Partner White Paper</span>
+      <h1>From physical transport to digital court processing.</h1>
+      <p class="dek">A replicable model for modernizing time-sensitive justice workflows — drawn from the 16th Judicial District Court's transition away from transportation-dependent 72-hour appearances.</p>
+      <div class="hero-meta">
+        <div><span class="k">Case study</span><span class="v">16th JDC (Iberia, St. Martin, St. Mary)</span></div>
+        <div><span class="k">Primary source</span><span class="v">Ryan Bourque interview</span></div>
+        <div><span class="k">Status</span><span class="v">Pre-publication — needs validation</span></div>
+      </div>
+    </header>
+
+    <section id="wp-summary">
+      <div class="section-head"><span class="idx">01</span><h2>Executive Summary</h2></div>
+      <p class="section-intro">Justice-system delays rarely begin with complex legal questions. They begin with ordinary operational friction — a document waiting to be delivered, an officer leaving the agency to transport paperwork, a defendant waiting to be physically moved, court personnel re-entering information, a prosecutor waiting for a complete referral, several organizations working from different versions of the same record.</p>
+      <div class="thesis">Faster court processing requires more than digitizing a form. It requires redesigning the movement of people, documents, decisions, and accountability across the justice system.</div>
+      <p class="section-intro"><span class="chip founder" style="margin-right:.4em;">Founder</span>According to Ryan Bourque, IT Director for the 16th JDC and Blue Partner cofounder, the district moved its 72-hour appearance process from a transportation-dependent, paper-supported workflow to a digital model using video conferencing and cloud-based document exchange.</p>
+      <div class="contrib-title">What the transformation required</div>
+      <ul class="contrib-list" style="margin-bottom:1.6rem;">
+        <li>A clearly defined legal workflow</li><li>Accessible video-conferencing equipment</li><li>A repeatable document-submission process</li><li>Judicial authority supporting the change</li><li>Clear consequences for nonparticipation</li><li>Operational ownership across agency boundaries</li>
+      </ul>
+      <p style="font-size:.85rem; color:var(--text-dim);">This paper examines the transition as a replicable operating model — not a promotion of one technology platform, but a template for how courts, law enforcement, clerks, prosecutors, jails, and local governments can reduce avoidable delay together.</p>
+    </section>
+
+    <section id="wp-environment">
+      <div class="section-head"><span class="idx">02</span><h2>Operating Environment &amp; Statutory Requirement</h2></div>
+      <div class="stat-grid">
+        <div class="stat-box"><h5>16th JDC snapshot</h5><ul><li>Iberia Parish</li><li>St. Martin Parish</li><li>St. Mary Parish</li><li>8 elected judges</li></ul></div>
+        <div class="stat-box"><h5>Independent orgs in the workflow</h5><ul><li>Police &amp; sheriffs</li><li>Booking/corrections</li><li>Judges &amp; city courts</li><li>Clerks of court</li><li>DA &amp; ADAs</li><li>Transport &amp; IT staff</li></ul></div>
+      </div>
+      <p style="font-size:.78rem; color:var(--text-faint); margin-top:.6rem;"><a class="chip verified" href="https://www.16jdc.org/" target="_blank" rel="noopener" style="margin-right:.4em;">Verified</a>16th JDC official site — original jurisdiction over civil and criminal matters in the three-parish district.</p>
+      <div class="callout" style="margin-top:1.4rem;">Fragmentation matters. A workflow can look simple from inside one agency. Across the full system, the same workflow may require multiple handoffs, duplicated work, physical transportation, manual filing, and delayed decisions.</div>
+
+      <div class="two-col" style="margin-top:1.8rem;">
+        <div class="north"><span class="n">THE REQUIREMENT</span><h4>La. C.Cr.P. art. 230.1</h4><p><a class="chip verified" style="margin-right:.3em;" href="https://www.legis.la.gov/legis/Law.aspx?d=112388" target="_blank" rel="noopener">Verified</a>A person in custody must be brought before a judge promptly — within 72 hours of arrest — for appointment of counsel. Weekends and legal holidays are excluded. The appearance may occur by telephone or audio-video equipment when authorized by local rule. A separate rule requires a probable-cause determination within <a class="chip verified" style="margin:0 .3em;" href="https://www.legis.la.gov/legis/Law.aspx?d=112389" target="_blank" rel="noopener">Verified</a>48 hours for qualifying warrantless arrests.</p></div>
+        <div class="north" style="border-color:var(--inference);"><span class="n" style="color:var(--inference);">WHAT IT DOESN'T SOLVE</span><h4>A deadline, not a process</h4><p>The statute doesn't determine how the appearance is scheduled, where the defendant appears, how the judge receives paperwork, who verifies the record is complete, how bond decisions reach the clerk and prosecutor, or what happens when an agency misses its part.</p></div>
+      </div>
+    </section>
+
+    <section id="wp-legacy">
+      <div class="section-head"><span class="idx">03</span><h2>The Legacy Workflow</h2></div>
+      <p class="section-intro"><span class="chip founder" style="margin-right:.4em;">Founder</span>Before digitization, law-enforcement and correctional personnel depended on physical processes to move defendants and paperwork through the district. People move. Paper moves. Vehicles move. The court calendar waits for each required component to arrive.</p>
+      <ol class="opp-steps" style="grid-template-columns:repeat(3,1fr); margin-bottom:1.8rem;">
+        <li>Individual arrested and booked</li>
+        <li>Booking staff prepare documentation</li>
+        <li>Individual made available to a judge</li>
+        <li>Personnel coordinate transport or appearance</li>
+        <li>Paperwork physically transmitted</li>
+        <li>Judge reviews the record</li>
+        <li>Judge addresses counsel, bond, related matters</li>
+        <li>Paperwork distributed to clerks &amp; prosecutors</li>
+        <li>Receiving staff file, sort, or re-enter it</li>
+      </ol>
+      <div class="asset-grid">
+        <div class="asset"><b>Transportation dependency</b><span>An officer or deputy is pulled off normal duties to transport a defendant</span></div>
+        <div class="asset"><b>Scheduling dependency</b><span>Jail, transport, court, judge, and receiving staff must all be ready at compatible times</span></div>
+        <div class="asset"><b>Paper dependency</b><span>The appearance stalls when paperwork is incomplete, late, misplaced, or unavailable to one party</span></div>
+        <div class="asset"><b>Batch processing</b><span>Agencies wait to transmit multiple records at once instead of moving each when ready</span></div>
+        <div class="asset"><b>Administrative rework</b><span>Receiving staff sort, scan, file, or re-enter information that already exists elsewhere</span></div>
+        <div class="asset"><b>Limited visibility</b><span>No one can easily say where a record is, who has it, or how long it's been waiting</span></div>
+      </div>
+    </section>
+
+    <section id="wp-transition">
+      <div class="section-head"><span class="idx">04</span><h2>The Digital Transition</h2></div>
+      <p class="section-intro"><span class="chip founder" style="margin-right:.4em;">Founder</span>Bourque had advocated for a digital appearance process for roughly a decade before COVID-19. The technology was available and the workflow could be designed — the barrier was institutional agreement. When physical transportation became difficult during the pandemic, the district had an immediate operational need and transitioned rapidly.</p>
+      <div class="two-col">
+        <div class="north"><span class="n">REMOTE APPEARANCES</span><h4>Zoom-enabled iPads</h4><p>Login credentials were saved on the device rather than relying on every correctional officer to enter or remember a password. A small usability fix that removed the single biggest point of friction.</p></div>
+        <div class="north"><span class="n">DOCUMENT TRANSMISSION</span><h4>PDF + cloud folder</h4><p>Police and booking staff converted paperwork to PDF and placed it in a designated cloud folder. The judge reviewed it digitally; the same files reached clerks and the DA's office without a second trip.</p></div>
+      </div>
+      <div class="opp-thesis" style="margin:1.6rem 0;">This changed the workflow from "transport the person and move the paper" to "connect the person and move the information."</div>
+      <div class="callout"><b>Replication lesson:</b> small usability problems can stop a legally sound, technically capable process from working in practice. Design for the actual employee completing the task, under actual field conditions.</div>
+    </section>
+
+    <section id="wp-adoption">
+      <div class="section-head"><span class="idx">05</span><h2>Adoption, Personnel &amp; Results</h2></div>
+      <div class="callout"><span class="chip founder" style="margin-right:.5em;">Founder</span><b>The operating decision —</b> judges gave participating agencies a direct choice: use the electronic process, or maintain sufficient staffing to transport prisoners to court every morning. Agencies chose electronic. The digital process wasn't an optional convenience — it was the practical alternative to a more expensive, staff-intensive one. That's why it stuck.</div>
+      <div class="contrib-title" style="margin-top:1.6rem;">Personnel &amp; process fit</div>
+      <p style="font-size:.88rem; color:var(--text-dim); margin-bottom:1rem;">Not every employee who previously handled paper was prepared for a digital workflow. Agencies reassigned the task rather than treating it as a technology failure — a role-design issue, not a software one.</p>
+      <ul class="indicator-list" style="margin-bottom:1.8rem;">
+        <li>Who owns the task?</li><li>Does that person have the required skills?</li><li>Is the task part of an established job function?</li><li>Is there backup coverage?</li><li>What happens when a submission is incomplete?</li><li>Who has authority to correct noncompliance?</li>
+      </ul>
+      <div class="opp-cols">
+        <div class="opp-col good"><h5>Reported observations</h5><ul><li>Defendants appear before judges via video</li><li>Booking paperwork is electronically transmitted for judicial review</li><li>Documents reach clerks and prosecutors without a second trip</li><li>Agencies no longer rely exclusively on daily physical transport</li><li>The workflow became routine after implementation</li></ul></div>
+        <div class="opp-col watch"><h5>Not yet established</h5><ul><li>Number of appearances processed, agencies participating</li><li>Transports avoided, officer hours recovered</li><li>Change in average processing time or statutory compliance</li><li>Financial savings, technical failure rate, stakeholder satisfaction</li><li>Effect on bond-setting time or jail length of stay</li></ul></div>
+      </div>
+      <p style="font-size:.82rem; color:var(--text-faint); margin-top:.8rem;">These measurements should be collected before this is published as a formal, measured case study.</p>
+    </section>
+
+    <section id="wp-model">
+      <div class="section-head"><span class="idx">06</span><h2>The Replication Model</h2></div>
+      <p class="section-intro">The 16th JDC experience translates into a seven-part model. Don't start by selecting software — start with the legal event.</p>
+      <div class="path-stack">
+        <div class="path-step"><span class="pstep-num">1</span><div><h4>Define the legal event</h4><ul><li>Legal authority</li><li>Required deadline</li><li>Authorized decision-maker</li><li>Minimum required information</li><li>Official record created</li><li>Permitted appearance/transmission method</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">2</span><div><h4>Map the current workflow</h4><ul><li>Who creates/receives each item</li><li>How it's transmitted</li><li>How long it waits</li><li>Where it's re-entered</li><li>Where errors occur</li><li>Where transport is required</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">3</span><div><h4>Establish a baseline</h4><ul><li>Arrest-to-appearance time</li><li>Physical transports per week</li><li>Employees touching each record</li><li>Incomplete-submission rate</li><li>Missed/delayed appearances</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">4</span><div><h4>Design the minimum viable workflow</h4><ul><li>Video-capable device</li><li>Conferencing platform</li><li>Saved credentials</li><li>PDF documents</li><li>Designated cloud folder</li><li>Assigned personnel</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">5</span><div><h4>Assign authority &amp; ownership</h4><ul><li>Executive &amp; judicial sponsor</li><li>Technical owner</li><li>Agency coordinator</li><li>Document-quality owner</li><li>Escalation pathway</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">6</span><div><h4>Remove the parallel paper process</h4><ul><li>Digital becomes the default</li><li>Exceptions for outages, emergencies, accessibility, security, evidentiary needs</li></ul></div></div>
+        <div class="path-step"><span class="pstep-num">7</span><div><h4>Publish the results</h4><ul><li>Internal accountability</li><li>Budget &amp; grant justification</li><li>Public transparency</li><li>Replication evidence</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="wp-scorecard">
+      <div class="section-head"><span class="idx">07</span><h2>Faster Court Processing Scorecard</h2></div>
+      <div class="thesis">Primary outcome: time from arrest to completed judicial appearance.</div>
+      <div class="stat-grid">
+        <div class="stat-box"><h5>Processing</h5><ul><li>Booking-to-submission time</li><li>Submission-to-review time</li><li>% completed within window</li><li>% needing manual intervention</li></ul></div>
+        <div class="stat-box"><h5>Transportation</h5><ul><li>Transports avoided</li><li>Officer hours recovered</li><li>Vehicle miles &amp; fuel avoided</li><li>Overtime avoided</li></ul></div>
+        <div class="stat-box"><h5>Documents</h5><ul><li>First-attempt completeness</li><li>Missing/incorrect-document rate</li><li>Duplicate submissions</li><li>Average correction time</li></ul></div>
+        <div class="stat-box"><h5>Workforce</h5><ul><li>Employees touching each case</li><li>Admin minutes per case</li><li>Help-desk requests</li><li>Staff adoption rate</li></ul></div>
+        <div class="stat-box"><h5>Court &amp; jail</h5><ul><li>Time to counsel appointment</li><li>Hearings delayed/rescheduled</li><li>Avoidable detention time</li><li>Calendar capacity created</li></ul></div>
+        <div class="stat-box"><h5>Prosecutorial</h5><ul><li>Referrals received electronically</li><li>Referrals needing correction</li><li>Time to screening decision</li><li>Repeat requests to originating agency</li></ul></div>
+      </div>
+    </section>
+
+    <section id="wp-referrals">
+      <div class="section-head"><span class="idx">08</span><h2>Extending to Prosecutorial Referrals</h2></div>
+      <p class="section-intro"><span class="chip founder" style="margin-right:.4em;">Founder</span>A structurally similar, but distinct, workflow: law-enforcement referrals to the DA. Agencies may still deliver referral documents in batches — larger departments regularly, smaller ones weekly, monthly, or only when cases are ready. A physical, batch-based model creates latency before prosecutorial review even begins.</p>
+      <div class="opp-cols" style="margin-bottom:1.4rem;">
+        <div class="opp-col watch"><h5>What the physical model requires</h5><ul><li>An officer leaves the agency</li><li>Documents physically delivered</li><li>Staff sort and file the submission</li><li>Investigators/ADAs locate the record</li><li>Manual tracking of status</li></ul></div>
+        <div class="opp-col good"><h5>A complete referral model must define</h5><ul><li>Required documents by offense type</li><li>Naming conventions &amp; case identifiers</li><li>Submission status &amp; receipt confirmation</li><li>Completeness review &amp; correction requests</li><li>Chain of custody, access controls, retention, audit history</li></ul></div>
+      </div>
+      <p style="font-size:.85rem; color:var(--text-dim);">The 72-hour appearance model is a starting point. The larger opportunity is connected workflows between law enforcement, courts, clerks, and prosecutors.</p>
+    </section>
+
+    <section id="wp-role">
+      <div class="section-head"><span class="idx">09</span><h2>Blue Partner's Role</h2></div>
+      <div class="thesis">The strategic value isn't simply faster writing. It's faster, more complete, and more visible case movement.</div>
+      <div class="contrib-title">A Blue Partner-supported workflow could help agencies</div>
+      <ul class="contrib-list" style="margin-bottom:1.6rem;">
+        <li>Capture required information earlier</li><li>Improve report completeness</li><li>Identify missing elements before submission</li><li>Standardize referral packages</li><li>Reduce avoidable corrections</li><li>Create defensible timestamps</li><li>Track when each handoff occurs</li><li>Give leaders backlog visibility</li><li>Give prosecutors pending-referral visibility</li><li>Measure incident-to-review time</li>
+      </ul>
+      <div class="recon"><b>Discipline before claims —</b> any future Blue Partner claims concerning accuracy, time savings, case acceptance, conviction outcomes, or legal sufficiency should be tested through structured pilots before external publication.</div>
+    </section>
+
+    <section id="wp-pilot">
+      <div class="section-head"><span class="idx">10</span><h2>Recommended Replication Pilot</h2></div>
+      <div class="asset-grid">
+        <div class="asset"><b>Objective</b><span>Reduce elapsed time between a record's completion and the next required court or prosecutorial decision</span></div>
+        <div class="asset"><b>Scope</b><span>One court, one prosecutorial unit, 2–3 LE agencies, one document type, a 60–90 day window</span></div>
+      </div>
+      <div class="combined" style="margin-top:1.4rem;">
+        <ol><li>Baseline — measure the existing process unchanged</li><li>Workflow design — requirements, ownership, routing, exceptions</li><li>Limited activation — a controlled group of cases</li><li>Comparison — digital vs. baseline</li><li>Expansion decision — expand, revise, or discontinue</li></ol>
+      </div>
+      <div class="contrib-title" style="margin-top:1.4rem;">Minimum success measures</div>
+      <ul class="indicator-list">
+        <li>Reduced median processing time</li><li>Reduced physical transportation</li><li>Increased first-pass completeness</li><li>Reduced administrative handling</li><li>No material loss of legal or evidentiary integrity</li><li>Documented stakeholder acceptance and a clear audit history</li>
+      </ul>
+    </section>
+
+    <section id="wp-governance">
+      <div class="section-head"><span class="idx">11</span><h2>Governance &amp; Risk</h2></div>
+      <p class="section-intro">A faster process is not successful if it weakens the integrity, accessibility, or defensibility of the record. Each participating organization should review the workflow through its own legal, records, information-security, and operational authorities.</p>
+      <ul class="contrib-list" style="margin-bottom:1.4rem;">
+        <li>CJI security</li><li>Authentication &amp; RBAC</li><li>Audit logs</li><li>Records retention</li><li>Public-record obligations</li><li>Sealed records</li><li>Chain of custody</li><li>Business continuity &amp; DR</li><li>Vendor access</li><li>Data ownership &amp; portability</li><li>Cybersecurity</li><li>Local court rules</li><li>Accessibility</li><li>Defense access</li><li>Due process</li>
+      </ul>
+    </section>
+
+    <section id="wp-followup">
+      <div class="section-head"><span class="idx">12</span><h2>Follow-Up Questions &amp; Conclusion</h2></div>
+      <p class="section-intro">Before publication, Blue Partner should conduct structured follow-up interviews and data collection across six stakeholder groups:</p>
+      <div class="stat-grid">
+        <div class="stat-box"><h5>Court leadership</h5><ul><li>How many appearances processed?</li><li>Local rule or standing order?</li><li>Scheduling capacity change?</li></ul></div>
+        <div class="stat-box"><h5>Law enforcement &amp; corrections</h5><ul><li>Which agencies participate?</li><li>Transports before vs. now?</li><li>Staff time per transport?</li></ul></div>
+        <div class="stat-box"><h5>Clerks</h5><ul><li>Filing time change?</li><li>Error-rate change?</li><li>Duplicate entry reduced?</li></ul></div>
+      </div>
+      <div class="stat-grid" style="margin-top:1rem;">
+        <div class="stat-box"><h5>Prosecutors</h5><ul><li>When do documents arrive?</li><li>Are submissions complete?</li><li>Effect on screening time?</li></ul></div>
+        <div class="stat-box"><h5>Information technology</h5><ul><li>Systems &amp; security controls?</li><li>Outages or failures?</li><li>Annual maintenance cost?</li></ul></div>
+        <div class="stat-box"><h5>Finance &amp; admin</h5><ul><li>Transportation cost change?</li><li>Overtime change?</li><li>New technology purchased?</li></ul></div>
+      </div>
+      <div class="thesis" style="margin-top:2rem;">The fastest route to better court processing is often not a larger system. It is a clearer workflow.</div>
+      <p class="section-intro">Technology alone does not overcome institutional resistance, unclear ownership, poor personnel fit, parallel legacy processes, misaligned incentives, or a lack of measurable proof. Each organization owns part of the process — no one sees the full delay unless the system measures it together.</p>
+      <div class="combined">
+        <ol><li>Police create the record</li><li>Jails maintain custody</li><li>Judges make time-sensitive decisions</li><li>Clerks preserve the official record</li><li>Prosecutors evaluate the case</li><li>Local governments fund the people and systems connecting them</li></ol>
+      </div>
+      <p style="margin-top:1.4rem; font-size:.9rem;">The next step isn't simply to digitize more documents. It's to build a shared operating model that measures how quickly reliable information reaches the person authorized to make the next decision. That is how digital transformation becomes faster court processing — and how a local solution becomes a replicable justice-system model.</p>
+    </section>
+
+    <section id="wp-sources">
+      <div class="section-head"><span class="idx">13</span><h2>Sources &amp; Evidence Status</h2></div>
+      <div class="two-col">
+        <div class="north"><span class="n">INDEPENDENTLY VERIFIED</span><ul class="contrib-list" style="margin-top:.6rem;">
+          <li><a class="chip verified" href="https://www.16jdc.org/" target="_blank" rel="noopener">Verified</a>&nbsp;Parishes served &amp; jurisdiction</li>
+          <li><a class="chip verified" href="https://www.legis.la.gov/legis/Law.aspx?d=112388" target="_blank" rel="noopener">Verified</a>&nbsp;La. C.Cr.P. art. 230.1</li>
+          <li><a class="chip verified" href="https://www.legis.la.gov/legis/Law.aspx?d=112389" target="_blank" rel="noopener">Verified</a>&nbsp;48-hour probable-cause rule</li>
+        </ul></div>
+        <div class="north" style="border-color:var(--founder);"><span class="n" style="color:var(--founder);">INTERVIEW-REPORTED — NEEDS VALIDATION</span><ul class="contrib-list" style="margin-top:.6rem;">
+          <li>Implementation history &amp; timing</li><li>Zoom-enabled iPads &amp; cloud folders</li><li>Extent of agency participation</li><li>"Overnight" implementation claim</li><li>"No complaints" claim</li><li>Transports eliminated, time/cost savings</li><li>Digital-referral progress</li><li>St. Martinville &amp; Breaux Bridge status</li>
+        </ul></div>
+      </div>
+    </section>
+  </main>
+</div>
+</div>
 
 <script>
-(function(){
-  var links = Array.prototype.slice.call(document.querySelectorAll('#navlist a'));
-  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+function makeNavSpy(navListId){
+  var links = Array.prototype.slice.call(document.querySelectorAll('#' + navListId + ' a'));
   function onScroll(){
     var pos = window.scrollY + 140;
     var current = 0;
-    for (var i=0;i<sections.length;i++){
-      if (sections[i] && sections[i].offsetTop <= pos) current = i;
+    for (var i=0;i<links.length;i++){
+      var section = document.querySelector(links[i].getAttribute('href'));
+      if (section && section.offsetTop <= pos) current = i;
     }
     links.forEach(function(a,i){ a.classList.toggle('active', i===current); });
   }
   document.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  return onScroll;
+}
+window.__navSpies = [makeNavSpy('navlist'), makeNavSpy('wpNavlist')];
+window.__navSpies.forEach(function(fn){ fn(); });
+
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.view-tab'));
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.view-panel').forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      document.getElementById('view-' + tab.getAttribute('data-view')).classList.add('active');
+      window.scrollTo(0,0);
+      window.__navSpies.forEach(function(fn){ fn(); });
+    });
+  });
 })();
 </script>
 
@@ -1443,6 +1711,7 @@ var BIZ_PROFILES = {
   });
 })();
 </script>
+
 
 </body>
 </html>
